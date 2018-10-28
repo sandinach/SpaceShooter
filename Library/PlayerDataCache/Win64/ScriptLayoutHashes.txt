@@ -1,10 +1,9 @@
 WindowsStandalone
 PlayerPath?
-C:/Users/andpo/OneDrive/Documents/test_build/TFG - Space Shooter.exe
+C:/Users/andpo/OneDrive/Documents/TFG - Space Shooter/_Ejecutable/TFG - Space Shooter.exe
 SceneListBegin?
 Assets/Scenes/Main.unity
 Assets/Scenes/Juego.unity
-Assets/Scenes/Taller.unity
 SceneListEnd?
 2deabec9b4bb9befb311a122fa0109e1 Assembly-CSharp.dll:.BackgroundScroll
 c422dd62785a6d0afa870fbd111886ce Unity.TextMeshPro.dll:TMPro.TMP_SelectionCaret
@@ -169,7 +168,7 @@ e1ea12ca952c81d81a9a21fdf34446ed UnityEngine.HoloLens.dll:UnityEngine.EventSyste
 98d69a140ec0084cde3b6a5e09aea295 UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingCollider
 dfd33ff9ae3ce8d7ca1f22b475ec2387 UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
 aac9c55ae7ba4b95b852a7d9c191acd1 Unity.TextMeshPro.dll:TMPro.TextMeshProUGUI
-28a4e7a90fe6a3db224bcaed605beb51 Assembly-CSharp.dll:.ControladorDeJuego
+74cc223c9ac13dabf7a94fe9989909f9 Assembly-CSharp.dll:.ControladorDeJuego
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.ControladorDeMenu
 0a006f3734181ba8b26758f0866152c0 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 e04611b8715e6833d2bd7010fc6be10b Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet

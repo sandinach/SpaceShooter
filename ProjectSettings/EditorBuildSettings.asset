@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Juego.unity
     guid: 5f5efdd8a3812e2428dff8f13874db26
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Taller.unity
     guid: 7137a6bee7651e74db61b522a2990b87
   m_configObjects: {}

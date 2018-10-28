@@ -1,3 +1,4 @@
 # Auto detect text files and perform LF normalization
 * text=auto
 .vs/ filter=lfs diff=lfs merge=lfs -text
+_Ejecutable/ filter=lfs diff=lfs merge=lfs -text
