@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,8 +25,10 @@ public class ControladorDeJuego : MonoBehaviour
     /// </summary>
     public float pausaEntreOleadas;
 
-    public UnityEngine.UI.Text textoPuntuacion;
-    public UnityEngine.UI.Text textoEstado;
+    public TextMeshProUGUI textoPuntuacion;
+    public TextMeshProUGUI textoEstado;
+    public GameObject MenuOpciones;
+    
 
     private bool gameOver;
     private bool restart;
@@ -39,15 +42,17 @@ public class ControladorDeJuego : MonoBehaviour
         score = 0;
         restart = false;
         gameOver = false;
-        textoEstado.text = "";
+        textoEstado.SetText("");
+        MenuOpciones.SetActive(false);
         UpdateScore();
         StartCoroutine(SpawnWaves());
     }
 
     public void GameOver()
     {
-            textoEstado.text = "Game Over!";
-            gameOver = true;
+        textoEstado.SetText("Game Over!");
+        gameOver = true;
+        //El menú lo mostramos al terminar la oleada
     }
 
     public void RestartLevel()
@@ -64,7 +69,7 @@ public class ControladorDeJuego : MonoBehaviour
 
     private void UpdateScore()
     {
-        textoPuntuacion.text = "Puntos:" + score;
+        textoPuntuacion.SetText("Puntos: " + score);
     }
 
     private void Update()
@@ -77,6 +82,7 @@ public class ControladorDeJuego : MonoBehaviour
             {
                 SceneManager.LoadScene("Juego");
             }
+            MenuOpciones.SetActive(true);
         }
     }
 
@@ -90,12 +96,12 @@ public class ControladorDeJuego : MonoBehaviour
         if(pausa)
         {
             Time.timeScale = 0;
-            textoEstado.text = "Partida en pausa";
+            textoEstado.SetText("Partida en pausa");
         }
         else
         {
             Time.timeScale = 1;
-            if(!gameOver) textoEstado.text = "";
+            if(!gameOver) textoEstado.SetText("");
         }
     }
 

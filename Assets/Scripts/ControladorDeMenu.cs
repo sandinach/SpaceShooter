@@ -5,8 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class ControladorDeMenu : MonoBehaviour
 {
+    public void CargarEscenaMenu()
+    {
+        SceneManager.LoadScene("Main");
+    }
 
-	public void CargarEscenaJuego()
+    public void CargarEscenaJuego()
     {
         SceneManager.LoadScene("Juego");
     }
