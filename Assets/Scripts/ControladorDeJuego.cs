@@ -10,7 +10,7 @@ public class ControladorDeJuego : MonoBehaviour
 {
     public GameObject[] tiposDeEnemigos;
     public Vector3 zonaDespliegeEnemigos;
-    public int enemigosPorOleada;
+
     /// <summary>
     /// Pausa entre enemigo y enemigo dentro de la oleada
     /// </summary>
@@ -110,7 +110,7 @@ public class ControladorDeJuego : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(pausaInicial);
-            for (int i = 0; i < enemigosPorOleada; i++)
+            for (int i = 0; i < CONFIGURACION.GetEnemigosPorOleada(); i++)
             {
                 GameObject enemigo = tiposDeEnemigos[UnityEngine.Random.Range(0, tiposDeEnemigos.Length)];
                 Vector3 posicionDespliege = new Vector3(UnityEngine.Random.Range(-zonaDespliegeEnemigos.x, zonaDespliegeEnemigos.x), zonaDespliegeEnemigos.y, zonaDespliegeEnemigos.z);

@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\AnimacionDeDestruccion.cs" />
     <Compile Include="Assets\Scripts\BackgroundScroll.cs" />
+    <Compile Include="Assets\Scripts\CONFIGURACION.cs" />
     <Compile Include="Assets\Scripts\ControladorDeJuego.cs" />
     <Compile Include="Assets\Scripts\ControladorDelJugador.cs" />
     <Compile Include="Assets\Scripts\ControladorDeMenu.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Assets\Scripts\Movimiento.cs" />
     <Compile Include="Assets\Scripts\MovimientoEvasivo.cs" />
     <Compile Include="Assets\Scripts\RotacionAleatoria.cs" />
+    <Compile Include="Assets\Scripts\SettingsMenu.cs" />
     <Compile Include="Assets\Scripts\SistemaArmamento.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
