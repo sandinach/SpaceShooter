@@ -305,7 +305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 201a24a7f29754541a8d0f85bb6d531d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocidad: -5
+  velocidad: -6
 --- !u!114 &114683713286971184
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -336,7 +336,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destino: 8
   smoothing: 7.5
-  inclinacion: 10
+  inclinacion: 8
   esperaInicial: {x: 0.5, y: 1}
   duracionManiobra: {x: 1, y: 2}
   esperaManiobra: {x: 1, y: 2}

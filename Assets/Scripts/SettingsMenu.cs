@@ -24,7 +24,7 @@ public class SettingsMenu : MonoBehaviour
         configurarSlider(sliderVelocidad, CONFIGURACION.GetConfigVelocidadEnemigos());
     }
 
-    private void configurarSlider(Slider control, SliderConfigInt config)
+    private void configurarSlider(Slider control, SliderConfig config)
     {
         control.minValue = config.GetMin();
         control.value = config.GetCurrent();
@@ -45,13 +45,11 @@ public class SettingsMenu : MonoBehaviour
 
     public void SetNumeroEnemigos(float valor)
     {
-        sliderNumeroEnemigos.value = valor;
-        CONFIGURACION.SetEnemigosPorOleada(Convert.ToInt32(Math.Round(valor, 0)));
+        CONFIGURACION.SetEnemigosPorOleada(valor);
     }
 
     public void SetVelocidadEnemigos(float valor)
     {
-        sliderVelocidad.value = valor;
-        CONFIGURACION.SetEnemigosPorOleada(Convert.ToInt32(Math.Round(valor,0)));
+        CONFIGURACION.SetVelocidadEnemigos(valor);
     }
 }

@@ -33,8 +33,9 @@ public class ControladorDeJuego : MonoBehaviour
     private bool gameOver;
     private bool restart;
     private int score;
-
     private bool pausa;
+
+    int numeroEnemigos;
 
     void Start()
     {
@@ -42,6 +43,9 @@ public class ControladorDeJuego : MonoBehaviour
         score = 0;
         restart = false;
         gameOver = false;
+
+        numeroEnemigos = (int) CONFIGURACION.GetEnemigosPorOleada();
+
         textoEstado.SetText("");
         MenuOpciones.SetActive(false);
         UpdateScore();
@@ -110,7 +114,7 @@ public class ControladorDeJuego : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(pausaInicial);
-            for (int i = 0; i < CONFIGURACION.GetEnemigosPorOleada(); i++)
+            for (int i = 0; i < numeroEnemigos; i++)
             {
                 GameObject enemigo = tiposDeEnemigos[UnityEngine.Random.Range(0, tiposDeEnemigos.Length)];
                 Vector3 posicionDespliege = new Vector3(UnityEngine.Random.Range(-zonaDespliegeEnemigos.x, zonaDespliegeEnemigos.x), zonaDespliegeEnemigos.y, zonaDespliegeEnemigos.z);
