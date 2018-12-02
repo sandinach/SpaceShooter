@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 public class ControladorDeJuego : MonoBehaviour
@@ -28,7 +29,12 @@ public class ControladorDeJuego : MonoBehaviour
     public TextMeshProUGUI textoPuntuacion;
     public TextMeshProUGUI textoEstado;
     public GameObject MenuOpciones;
-    
+
+    public Slider BarraDeSalud;
+    public Slider BarraDeEnergia;
+    public Image ImagenImpacto;
+    public float flashSpeed = 5f;
+    public Color flashColor = new Color(1f, 0f, 0f, 0.5f);
 
     private bool gameOver;
     private bool restart;
@@ -37,12 +43,19 @@ public class ControladorDeJuego : MonoBehaviour
 
     int numeroEnemigos;
 
+    //Gestion de vida
+    int saludJugadorInicial = 100;
+    int saludJugador;
+    bool impactoRecibido = false;
+
     void Start()
     {
         pausa = false;
         score = 0;
         restart = false;
         gameOver = false;
+        saludJugador = saludJugadorInicial;
+        BarraDeSalud.value = saludJugador;
 
         numeroEnemigos = (int) CONFIGURACION.GetEnemigosPorOleada();
 
@@ -88,6 +101,10 @@ public class ControladorDeJuego : MonoBehaviour
             }
             MenuOpciones.SetActive(true);
         }
+        else
+        {
+            gestionarImpacto();
+        }
     }
 
     private void gestionarPausa()
@@ -130,5 +147,31 @@ public class ControladorDeJuego : MonoBehaviour
                 break;
             }
         }
+    }
+
+    private void gestionarImpacto()
+    {
+        if(impactoRecibido)
+        {
+            ImagenImpacto.color = flashColor;
+        }
+        else
+        {
+            ImagenImpacto.color = Color.Lerp(ImagenImpacto.color, Color.clear, flashSpeed * Time.deltaTime);
+        }
+        impactoRecibido = false;
+    }
+
+    public bool Impacto(int daño)
+    {
+        impactoRecibido = true; //Activo el flag de impacto
+        saludJugador -= daño;
+        BarraDeSalud.value = saludJugador;
+        if (saludJugador <= 0) //Si se queda sin vida...
+        {
+            GameOver();
+            return true;
+        }
+        return false;
     }
 }

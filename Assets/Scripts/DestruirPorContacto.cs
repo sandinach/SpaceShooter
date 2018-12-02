@@ -5,6 +5,7 @@ using UnityEngine;
 public class DestruirPorContacto : MonoBehaviour
 {
     public int puntuacion;
+    public int daño = 25;
     private ControladorDeJuego controladorDeJuego;
 
     public GameObject explosionPropia;
@@ -35,14 +36,14 @@ public class DestruirPorContacto : MonoBehaviour
 
         Explotar();
 
+        bool destruir = true;
         if (other.CompareTag("Player"))
         {
             //El jugador define su propia animación de explosión
             AnimacionDeDestruccion animacion = other.gameObject.GetComponent<AnimacionDeDestruccion>();
-            if(animacion != null)
+            destruir = controladorDeJuego.Impacto(daño);
+            if(destruir && animacion != null)
                 animacion.Destruir(other.transform);
-            //Instantiate(explosionJugador, other.transform.position, other.transform.rotation);
-            controladorDeJuego.GameOver();
         }
         else
         {
@@ -51,7 +52,8 @@ public class DestruirPorContacto : MonoBehaviour
         }
 
         controladorDeJuego.AddScore(puntuacion);
-        Destroy(other.gameObject);
+        if(destruir) //Para objetos normales es true, para el jugador depende de la vida
+            Destroy(other.gameObject);
         Destroy(gameObject);
     }
 
