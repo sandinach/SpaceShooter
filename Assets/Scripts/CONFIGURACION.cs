@@ -8,6 +8,10 @@ public static class CONFIGURACION
     private static SliderConfig VELOCIDAD_ENEMIGOS = new SliderConfig(4, 5, 8);
     private static SliderConfig ENEMIGOS_POR_OLEADA = new SliderConfig(5, 8, 20); //Establezco un rango de 5 a 20 con valor actual de 8
 
+    //Gestion de energia
+    private static SliderConfig GENERACION_ENERGIA = new SliderConfig(0, 1, 3);
+    private static SliderConfig ENERGIA_INICIAL = new SliderConfig(0, 20, 100);
+
     /// <summary>
     /// Devuelve el valor de configuración o la preferencia de usuario para los enemigos por oleada
     /// </summary>
@@ -22,6 +26,30 @@ public static class CONFIGURACION
     public static SliderConfig GetConfigEnemigosPorOleada()
     {
         return ENEMIGOS_POR_OLEADA;
+    }
+
+    public static float GetEnergiaInicial()
+    {
+        float preferencia = PlayerPrefs.GetFloat("EnergiaInicial", ENERGIA_INICIAL.GetCurrent());
+        ENERGIA_INICIAL.SetCurrent(preferencia); //Asigna si esta en rango
+        return ENERGIA_INICIAL.GetCurrent();
+    }
+
+    public static SliderConfig GetConfigEnergiaInicial()
+    {
+        return ENERGIA_INICIAL;
+    }
+
+    public static float GetGeneracionEnergia()
+    {
+        float preferencia = PlayerPrefs.GetFloat("GeneracionEnergia", GENERACION_ENERGIA.GetCurrent());
+        GENERACION_ENERGIA.SetCurrent(preferencia); //Asigna si esta en rango
+        return GENERACION_ENERGIA.GetCurrent();
+    }
+
+    public static SliderConfig GetConfigGeneracionEnergia()
+    {
+        return GENERACION_ENERGIA;
     }
 
     /// <summary>
@@ -53,6 +81,24 @@ public static class CONFIGURACION
         {
             PlayerPrefs.SetFloat("VelocidadEnemigos", velocidadEnemigos);
             VELOCIDAD_ENEMIGOS.SetCurrent(velocidadEnemigos);
+        }
+    }
+
+    public static void SetGeneracionEnergia(float valor)
+    {
+        if (GetGeneracionEnergia() != valor)
+        {
+            PlayerPrefs.SetFloat("GeneracionEnergia", valor);
+            GENERACION_ENERGIA.SetCurrent(valor);
+        }
+    }
+
+    public static void SetEnergiaInicial(float valor)
+    {
+        if (GetEnergiaInicial() != valor)
+        {
+            PlayerPrefs.SetFloat("EnergiaInicial", valor);
+            ENERGIA_INICIAL.SetCurrent(valor);
         }
     }
 }

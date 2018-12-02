@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,19 +20,42 @@ public class ControladorDelJugador : MonoBehaviour
     /// </summary>
     public GameObject Municion;
     /// <summary>
+    /// Munición
+    /// </summary>
+    public GameObject MunicionSecundaria;
+    /// <summary>
     /// Ranuras de armamento
     /// </summary>
     public Transform[] RanurasDisparo;
     /// <summary>
+    /// Ranuras de armamento
+    /// </summary>
+    public Transform[] RanurasDisparoSecundario;
+    /// <summary>
     /// Velocidad de disparo (cadencia)
     /// </summary>
     public float CadenciaDeDisparo;
+    /// <summary>
+    /// Velocidad de disparo (cadencia)
+    /// </summary>
+    public float CadenciaDeDisparoSecundario;
 
     private float siguienteDisparo;
+    private float siguienteDisparoSecundario;
+    private ControladorDeEnergia controladorDeEnergia;
 
     public ControladorDelJugador()
     {
 
+    }
+
+    private void Start()
+    {
+        GameObject gameControlerObject = GameObject.FindWithTag("ControlDeEnergia");
+        if (gameControlerObject != null)
+        {
+            controladorDeEnergia = gameControlerObject.GetComponent<ControladorDeEnergia>();
+        }
     }
 
     private void Update()
@@ -45,6 +69,26 @@ public class ControladorDelJugador : MonoBehaviour
                 EjecutarDisparo(Municion, ranura);
             }
         }
+        else
+        {
+            if (Input.GetButton("Fire2") && Time.time > siguienteDisparoSecundario && tengoEnergia())
+            {
+                siguienteDisparoSecundario = Time.time + CadenciaDeDisparoSecundario;
+                foreach (var ranura in RanurasDisparoSecundario)
+                {
+                    EjecutarDisparo(MunicionSecundaria, ranura);
+                }
+            }
+        }
+    }
+
+    private bool tengoEnergia()
+    {
+        if(controladorDeEnergia != null && controladorDeEnergia.ObtenerEnergia(5))
+        {
+            return true;
+        }
+        return false;
     }
 
     private void EjecutarDisparo(GameObject toTipoDisparo, Transform toPosicion)

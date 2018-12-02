@@ -64,6 +64,7 @@
     <Compile Include="Assets\Scripts\AnimacionDeDestruccion.cs" />
     <Compile Include="Assets\Scripts\BackgroundScroll.cs" />
     <Compile Include="Assets\Scripts\CONFIGURACION.cs" />
+    <Compile Include="Assets\Scripts\ControladorDeEnergia.cs" />
     <Compile Include="Assets\Scripts\ControladorDeJuego.cs" />
     <Compile Include="Assets\Scripts\ControladorDelJugador.cs" />
     <Compile Include="Assets\Scripts\ControladorDeMenu.cs" />

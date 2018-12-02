@@ -31,7 +31,6 @@ public class ControladorDeJuego : MonoBehaviour
     public GameObject MenuOpciones;
 
     public Slider BarraDeSalud;
-    public Slider BarraDeEnergia;
     public Image ImagenImpacto;
     public float flashSpeed = 5f;
     public Color flashColor = new Color(1f, 0f, 0f, 0.5f);

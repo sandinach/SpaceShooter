@@ -7,6 +7,7 @@ TagManager:
   - Enemigo
   - AreaDeJuego
   - Canvas
+  - ControlDeEnergia
   layers:
   - Default
   - TransparentFX
