@@ -11,6 +11,7 @@ public class ControladorDeJuego : MonoBehaviour
 {
     public GameObject[] tiposDeEnemigos;
     public Vector3 zonaDespliegeEnemigos;
+    public GameObject[] tiposDePowerUps;
 
     /// <summary>
     /// Pausa entre enemigo y enemigo dentro de la oleada
@@ -30,22 +31,13 @@ public class ControladorDeJuego : MonoBehaviour
     public TextMeshProUGUI textoEstado;
     public GameObject MenuOpciones;
 
-    public Slider BarraDeSalud;
-    public Image ImagenImpacto;
-    public float flashSpeed = 5f;
-    public Color flashColor = new Color(1f, 0f, 0f, 0.5f);
-
     private bool gameOver;
     private bool restart;
     private int score;
     private bool pausa;
+    private int numeroEnemigos;
 
-    int numeroEnemigos;
-
-    //Gestion de vida
-    int saludJugadorInicial = 100;
-    int saludJugador;
-    bool impactoRecibido = false;
+    private ControladorDeDificultad levelManager = new ControladorDeDificultad();
 
     void Start()
     {
@@ -53,9 +45,8 @@ public class ControladorDeJuego : MonoBehaviour
         score = 0;
         restart = false;
         gameOver = false;
-        saludJugador = saludJugadorInicial;
-        BarraDeSalud.value = saludJugador;
 
+        //Valor inicial para el número de enemigos
         numeroEnemigos = (int) CONFIGURACION.GetEnemigosPorOleada();
 
         textoEstado.SetText("");
@@ -83,6 +74,15 @@ public class ControladorDeJuego : MonoBehaviour
             UpdateScore();
     }
 
+    /// <summary>
+    /// Obtiene el nivel de juego actual (se usa durante el proceso de configuración de enemigos)
+    /// </summary>
+    /// <returns></returns>
+    public NivelDificultad GetNivelDificultad()
+    {
+        return levelManager.GetCurrentLevel();
+    }
+
     private void UpdateScore()
     {
         textoPuntuacion.SetText("Puntos: " + score);
@@ -99,10 +99,6 @@ public class ControladorDeJuego : MonoBehaviour
                 SceneManager.LoadScene("Juego");
             }
             MenuOpciones.SetActive(true);
-        }
-        else
-        {
-            gestionarImpacto();
         }
     }
 
@@ -138,6 +134,14 @@ public class ControladorDeJuego : MonoBehaviour
                 Instantiate(enemigo, posicionDespliege, rotacionDespliege);
                 yield return new WaitForSeconds(pausaEntreEnemigos);
             }
+
+            //Instanciamos un powerUp aleatoriamente
+            GameObject powerUp = tiposDePowerUps[UnityEngine.Random.Range(0, tiposDePowerUps.Length)];
+            Vector3 posicion = new Vector3(UnityEngine.Random.Range(-zonaDespliegeEnemigos.x, zonaDespliegeEnemigos.x), zonaDespliegeEnemigos.y, zonaDespliegeEnemigos.z);
+            Quaternion rotacion = Quaternion.identity;
+            Instantiate(powerUp, posicion, rotacion);
+
+
             yield return new WaitForSeconds(pausaEntreOleadas);
 
             if (gameOver)
@@ -146,31 +150,5 @@ public class ControladorDeJuego : MonoBehaviour
                 break;
             }
         }
-    }
-
-    private void gestionarImpacto()
-    {
-        if(impactoRecibido)
-        {
-            ImagenImpacto.color = flashColor;
-        }
-        else
-        {
-            ImagenImpacto.color = Color.Lerp(ImagenImpacto.color, Color.clear, flashSpeed * Time.deltaTime);
-        }
-        impactoRecibido = false;
-    }
-
-    public bool Impacto(int daño)
-    {
-        impactoRecibido = true; //Activo el flag de impacto
-        saludJugador -= daño;
-        BarraDeSalud.value = saludJugador;
-        if (saludJugador <= 0) //Si se queda sin vida...
-        {
-            GameOver();
-            return true;
-        }
-        return false;
     }
 }

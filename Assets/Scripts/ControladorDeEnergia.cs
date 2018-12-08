@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,6 +28,15 @@ public class ControladorDeEnergia : MonoBehaviour
             return true;
         }
         return false; //No hay suficiente energia
+    }
+
+    public void AumentarEnergia(int cantidad)
+    {
+        if (energia <= 100)
+        {
+            energia = Math.Min(100, energia + cantidad); //Maximo 100
+            actualizarBarra();
+        }
     }
 
     /// <summary>

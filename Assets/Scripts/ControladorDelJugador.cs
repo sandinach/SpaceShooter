@@ -51,10 +51,10 @@ public class ControladorDelJugador : MonoBehaviour
 
     private void Start()
     {
-        GameObject gameControlerObject = GameObject.FindWithTag("ControlDeEnergia");
-        if (gameControlerObject != null)
+        GameObject controlEnergiaObject = GameObject.FindWithTag("ControlDeEnergia");
+        if (controlEnergiaObject != null)
         {
-            controladorDeEnergia = gameControlerObject.GetComponent<ControladorDeEnergia>();
+            controladorDeEnergia = controlEnergiaObject.GetComponent<ControladorDeEnergia>();
         }
     }
 

@@ -7,6 +7,7 @@ public class DestruirPorContacto : MonoBehaviour
     public int puntuacion;
     public int daño = 25;
     private ControladorDeJuego controladorDeJuego;
+    private ControladorDeVida controladorDeVida;
 
     public GameObject explosionPropia;
     /// <summary>
@@ -25,6 +26,16 @@ public class DestruirPorContacto : MonoBehaviour
         {
             Debug.Log("No se ha encontrado 'ControladorDeJuego' script");
         }
+
+        GameObject controlObject = GameObject.FindWithTag("ControlDeVida");
+        if (controlObject != null)
+        {
+            controladorDeVida = controlObject.GetComponent<ControladorDeVida>();
+        }
+        if (controladorDeVida == null)
+        {
+            Debug.Log("No se ha encontrado 'controladorDeVida' script");
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -41,7 +52,7 @@ public class DestruirPorContacto : MonoBehaviour
         {
             //El jugador define su propia animación de explosión
             AnimacionDeDestruccion animacion = other.gameObject.GetComponent<AnimacionDeDestruccion>();
-            destruir = controladorDeJuego.Impacto(daño);
+            destruir = controladorDeVida.Impacto(daño);
             if(destruir && animacion != null)
                 animacion.Destruir(other.transform);
         }

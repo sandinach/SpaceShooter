@@ -15,10 +15,14 @@ public class SistemaArmamento : MonoBehaviour {
         InvokeRepeating("Disparar", EsperaInicial, CadenciaDeDisparo);
     }
 
-    // Update is called once per frame
+    public void Actualizar()
+    {
+        CancelInvoke("Disparar"); //Cancelo la secuencia de repetición actual
+        InvokeRepeating("Disparar", EsperaInicial, CadenciaDeDisparo); //Invoco con los nuevos parámetros
+    }
+
     void Disparar()
     {
-        //audioSource.Play();
         if (Municion != null)
         {
             foreach (var shotSpawn in shotSpawns)

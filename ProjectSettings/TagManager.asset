@@ -8,6 +8,7 @@ TagManager:
   - AreaDeJuego
   - Canvas
   - ControlDeEnergia
+  - ControlDeVida
   layers:
   - Default
   - TransparentFX
