@@ -10,7 +10,7 @@ public class ControladorDeVida : MonoBehaviour
     bool impactoRecibido = false;
     private ControladorDeJuego controladorDeJuego;
 
-    public Slider BarraDeSalud;
+    public Slider barraDeSalud;
     public Image ImagenImpacto;
     public float flashSpeed = 5f;
     public Color flashColor = new Color(1f, 0f, 0f, 0.5f);
@@ -29,7 +29,7 @@ public class ControladorDeVida : MonoBehaviour
         }
 
         saludJugador = saludJugadorInicial;
-        BarraDeSalud.value = saludJugador;
+        actualizarBarra();
     }
 	
 	// Update is called once per frame
@@ -70,7 +70,22 @@ public class ControladorDeVida : MonoBehaviour
         {
             saludJugador = Math.Min(100, saludJugador + cantidad); //Maximo 100
             actualizarBarra();
+            controladorDeJuego.Notificar("Salud +" + cantidad);
         }
+        else
+        {
+            controladorDeJuego.AddScore(cantidad);
+            controladorDeJuego.Notificar("Puntos +" + cantidad);
+        }
+    }
+
+    /// <summary>
+    /// Informa de la vida actual
+    /// </summary>
+    /// <returns></returns>
+    public int VidaActual()
+    {
+        return saludJugador;
     }
 
     /// <summary>
@@ -78,9 +93,9 @@ public class ControladorDeVida : MonoBehaviour
     /// </summary>
     private void actualizarBarra()
     {
-        if (BarraDeSalud != null)
+        if (barraDeSalud != null)
         {
-            BarraDeSalud.value = saludJugador;
+            barraDeSalud.value = saludJugador;
         }
     }
 }

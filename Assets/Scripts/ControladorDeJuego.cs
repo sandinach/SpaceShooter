@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
-public class ControladorDeJuego : MonoBehaviour
+public class ControladorDeJuego : MonoBehaviour, INotificador
 {
     public GameObject[] tiposDeEnemigos;
     public Vector3 zonaDespliegeEnemigos;
@@ -29,6 +29,8 @@ public class ControladorDeJuego : MonoBehaviour
 
     public TextMeshProUGUI textoPuntuacion;
     public TextMeshProUGUI textoEstado;
+    public TextMeshProUGUI textoNivel;
+    public TextMeshProUGUI textoNotificaciones;
     public GameObject MenuOpciones;
 
     private bool gameOver;
@@ -37,10 +39,11 @@ public class ControladorDeJuego : MonoBehaviour
     private bool pausa;
     private int numeroEnemigos;
 
-    private ControladorDeDificultad levelManager = new ControladorDeDificultad();
+    private ControladorDeDificultad levelManager = null;
 
     void Start()
     {
+        levelManager = new ControladorDeDificultad(this);
         pausa = false;
         score = 0;
         restart = false;
@@ -50,6 +53,7 @@ public class ControladorDeJuego : MonoBehaviour
         numeroEnemigos = (int) CONFIGURACION.GetEnemigosPorOleada();
 
         textoEstado.SetText("");
+        textoNotificaciones.SetText("");
         MenuOpciones.SetActive(false);
         UpdateScore();
         StartCoroutine(SpawnWaves());
@@ -70,8 +74,9 @@ public class ControladorDeJuego : MonoBehaviour
 
     public void AddScore(int newScoreValue)
     {
-            score += newScoreValue;
-            UpdateScore();
+        score += newScoreValue;
+        levelManager.Update(newScoreValue); //Actualizo el controlador de niveles
+        UpdateScore();
     }
 
     /// <summary>
@@ -80,12 +85,22 @@ public class ControladorDeJuego : MonoBehaviour
     /// <returns></returns>
     public NivelDificultad GetNivelDificultad()
     {
-        return levelManager.GetCurrentLevel();
+        return levelManager.GetNivelActual();
+    }
+
+    /// <summary>
+    /// Realiza una notificación al usuario
+    /// </summary>
+    /// <param name="texto"></param>
+    public void Notificar(string texto)
+    {
+        StartCoroutine(RealizarNotificacion(texto));
     }
 
     private void UpdateScore()
     {
         textoPuntuacion.SetText("Puntos: " + score);
+        textoNivel.SetText(levelManager.GetNombreNivel());
     }
 
     private void Update()
@@ -126,7 +141,7 @@ public class ControladorDeJuego : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(pausaInicial);
-            for (int i = 0; i < numeroEnemigos; i++)
+            for (int i = 0; i < calcularNumeroEnemigos(); i++)
             {
                 GameObject enemigo = tiposDeEnemigos[UnityEngine.Random.Range(0, tiposDeEnemigos.Length)];
                 Vector3 posicionDespliege = new Vector3(UnityEngine.Random.Range(-zonaDespliegeEnemigos.x, zonaDespliegeEnemigos.x), zonaDespliegeEnemigos.y, zonaDespliegeEnemigos.z);
@@ -151,4 +166,31 @@ public class ControladorDeJuego : MonoBehaviour
             }
         }
     }
+
+    private int calcularNumeroEnemigos()
+    {
+        int enemigosOleada = numeroEnemigos + levelManager.GetNivelActual().Enemigos;
+        Debug.Log("Enemigos por oleada: " + enemigosOleada);
+        return enemigosOleada;
+    }
+
+    IEnumerator RealizarNotificacion(string texto)
+    {
+        if(textoNotificaciones != null) //Establezco el texto de la notificación
+        {
+            textoNotificaciones.SetText(texto);
+        }
+
+        yield return new WaitForSeconds(CONFIGURACION.TIEMPO_NOTIFICACIONES);
+
+        if (textoNotificaciones != null) //Vacío la notificación
+        {
+            textoNotificaciones.SetText("");
+        }
+    }
+}
+
+public interface INotificador
+{
+    void Notificar(string texto);
 }

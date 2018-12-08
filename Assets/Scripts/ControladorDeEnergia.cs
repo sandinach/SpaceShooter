@@ -9,11 +9,22 @@ using UnityEngine.UI;
 public class ControladorDeEnergia : MonoBehaviour
 {
     private int energia = 0;
+    private ControladorDeJuego controladorDeJuego;
 
     public Slider barraEnergia;
 
     void Start()
     {
+        GameObject gameControlerObject = GameObject.FindWithTag("GameController");
+        if (gameControlerObject != null)
+        {
+            controladorDeJuego = gameControlerObject.GetComponent<ControladorDeJuego>();
+        }
+        if (controladorDeJuego == null)
+        {
+            Debug.Log("No se ha encontrado 'ControladorDeJuego' script");
+        }
+
         energia = (int) CONFIGURACION.GetEnergiaInicial();
         actualizarBarra();
         StartCoroutine(generarEnergia());
@@ -36,7 +47,22 @@ public class ControladorDeEnergia : MonoBehaviour
         {
             energia = Math.Min(100, energia + cantidad); //Maximo 100
             actualizarBarra();
+            controladorDeJuego.Notificar("Energía +" + cantidad);
         }
+        else
+        {
+            controladorDeJuego.AddScore(cantidad);
+            controladorDeJuego.Notificar("Puntos +" + cantidad);
+        }
+    }
+
+    /// <summary>
+    /// Informa de la energia actual
+    /// </summary>
+    /// <returns></returns>
+    public int EnergiaActual()
+    {
+        return energia;
     }
 
     /// <summary>

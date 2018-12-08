@@ -39,6 +39,7 @@ public class PowerUpVida : MonoBehaviour {
         if (controladorDeVida != null)
         {
             controladorDeVida.AumentarVida(valor);
+            Debug.Log("Salud del jugador " + controladorDeVida.VidaActual());
         }
 
         Destroy(gameObject); //Destruyo el power Up

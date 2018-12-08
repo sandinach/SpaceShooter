@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public static class CONFIGURACION
 {
+    public static readonly float TIEMPO_NOTIFICACIONES = 1f; //Un segundo
+
     //Parametros de inicialización
     private static SliderConfig VELOCIDAD_ENEMIGOS = new SliderConfig(4, 5, 8);
     private static SliderConfig ENEMIGOS_POR_OLEADA = new SliderConfig(5, 8, 20); //Establezco un rango de 5 a 20 con valor actual de 8

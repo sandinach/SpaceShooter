@@ -161,7 +161,6 @@ C:\Users\andpo\OneDrive\Documents\TFG - Space Shooter\Temp\bin\Debug\UnityEngine
 C:\Users\andpo\OneDrive\Documents\TFG - Space Shooter\Temp\bin\Debug\UnityEngine.GoogleAudioSpatializer.xml
 C:\Users\andpo\OneDrive\Documents\TFG - Space Shooter\Temp\bin\Debug\UnityEngine.HoloLens.xml
 C:\Users\andpo\OneDrive\Documents\TFG - Space Shooter\Temp\bin\Debug\UnityEngine.SpatialTracking.xml
-C:\Users\andpo\OneDrive\Documents\TFG - Space Shooter\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
 C:\Users\andpo\OneDrive\Documents\TFG - Space Shooter\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
 C:\Users\andpo\OneDrive\Documents\TFG - Space Shooter\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 C:\Users\andpo\OneDrive\Documents\TFG - Space Shooter\obj\Debug\Assembly-CSharp.dll
