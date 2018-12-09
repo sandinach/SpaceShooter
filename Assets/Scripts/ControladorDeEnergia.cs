@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,8 @@ public class ControladorDeEnergia : MonoBehaviour
     private int energia = 0;
     private ControladorDeJuego controladorDeJuego;
 
-    public Slider barraEnergia;
+    public Slider barra;
+    public TextMeshProUGUI textoValor;
 
     void Start()
     {
@@ -26,7 +28,7 @@ public class ControladorDeEnergia : MonoBehaviour
         }
 
         energia = (int) CONFIGURACION.GetEnergiaInicial();
-        actualizarBarra();
+        actualizarCapaVisual();
         StartCoroutine(generarEnergia());
     }
 
@@ -35,7 +37,7 @@ public class ControladorDeEnergia : MonoBehaviour
         if (energia >= cantidadRequerida)
         {
             energia -= cantidadRequerida;
-            actualizarBarra();
+            actualizarCapaVisual();
             return true;
         }
         return false; //No hay suficiente energia
@@ -43,10 +45,10 @@ public class ControladorDeEnergia : MonoBehaviour
 
     public void AumentarEnergia(int cantidad)
     {
-        if (energia <= 100)
+        if (energia < 100)
         {
             energia = Math.Min(100, energia + cantidad); //Maximo 100
-            actualizarBarra();
+            actualizarCapaVisual();
             controladorDeJuego.Notificar("Energía +" + cantidad);
         }
         else
@@ -68,16 +70,20 @@ public class ControladorDeEnergia : MonoBehaviour
     /// <summary>
     /// Actualiza la barra de energia
     /// </summary>
-    private void actualizarBarra()
+    private void actualizarCapaVisual()
     {
-        if (barraEnergia != null)
+        if (barra != null)
         {
-            barraEnergia.value = energia;
+            barra.value = energia;
+        }
+        if(textoValor != null)
+        {
+            textoValor.SetText(energia + "%");
         }
     }
 
     /// <summary>
-    /// Rutina de generación de energia
+    /// Rutina de regeneración
     /// </summary>
     /// <returns></returns>
     IEnumerator generarEnergia()
@@ -85,13 +91,14 @@ public class ControladorDeEnergia : MonoBehaviour
         while (true)
         { // loops forever...
             if (energia < 100)
-            { // if health < 100...
-                energia += (int) CONFIGURACION.GetGeneracionEnergia(); // increase health and wait the specified time
-                actualizarBarra();
+            { // Si está por debajo de 100
+                energia += (int) CONFIGURACION.GetGeneracionEnergia(); // Obtenemos el valor de incremento 
+                energia = Math.Min(100, energia); //Máximo 100
+                actualizarCapaVisual();
                 yield return new WaitForSeconds(1);
             }
             else
-            { // if health >= 100, just yield 
+            { // Si ya esta a tope, no hago nada 
                 yield return null;
             }
         }

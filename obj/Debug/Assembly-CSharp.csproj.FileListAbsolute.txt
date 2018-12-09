@@ -165,3 +165,4 @@ C:\Users\andpo\OneDrive\Documents\TFG - Space Shooter\obj\Debug\Assembly-CSharp.
 C:\Users\andpo\OneDrive\Documents\TFG - Space Shooter\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 C:\Users\andpo\OneDrive\Documents\TFG - Space Shooter\obj\Debug\Assembly-CSharp.dll
 C:\Users\andpo\OneDrive\Documents\TFG - Space Shooter\obj\Debug\Assembly-CSharp.pdb
+C:\Users\andpo\OneDrive\Documents\TFG - Space Shooter\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache

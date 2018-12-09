@@ -2,21 +2,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class ControladorDeDificultad
 {
     private NivelDificultad currentLevel;
     private IEnumerator<NivelDificultad> enumeradorNiveles;
     private INotificador notificador;
-    private int siguienteNivel = 100;
+    private int siguienteNivel;
     private bool nivelMaximoAlcanzado= false;
 
-    // Use this for initialization
+    private readonly string nombreFicheroDeNiveles = "niveles.json";
+
+    #region Constructores
+
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="toNotificador">Referencia al notificador</param>
     public ControladorDeDificultad(INotificador toNotificador)
     {
         notificador = toNotificador;
         LoadLevels();
 	}
+
+    #endregion Constructores
 
     /// <summary>
     /// Carga la configuración de niveles
@@ -25,6 +35,16 @@ public class ControladorDeDificultad
     {
         DefaultLevels();
     }
+
+    //private void LoadLevelsFromFile()
+    //{
+    //    string rutaFichero = Path.Combine(Application.streamingAssetsPath, nombreFicheroDeNiveles);
+    //    if(File.Exists(rutaFichero))
+    //    {
+    //        string nivelesAsJson = File.ReadAllText(rutaFichero);
+    //        NivelesDeDificultad nivel = JsonUtility.FromJson<NivelesDeDificultad>(nivelesAsJson);
+    //    }
+    //}
 
     /// <summary>
     /// Carga la configuración de niveles
@@ -92,6 +112,17 @@ public class ControladorDeDificultad
     {
         return currentLevel.NombreNivel;
     }
+}
+
+[System.Serializable]
+public class NivelesDeDificultad
+{
+    public NivelDificultad[] Niveles;
+
+    /// <summary>
+    /// Constructor por defecto
+    /// </summary>
+    public NivelesDeDificultad() { }
 }
 
 /// <summary>

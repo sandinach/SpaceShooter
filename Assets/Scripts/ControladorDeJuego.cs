@@ -41,6 +41,8 @@ public class ControladorDeJuego : MonoBehaviour, INotificador
 
     private ControladorDeDificultad levelManager = null;
 
+    private PuntuacionMaxima puntuacionMaxima;
+
     void Start()
     {
         levelManager = new ControladorDeDificultad(this);
@@ -56,13 +58,60 @@ public class ControladorDeJuego : MonoBehaviour, INotificador
         textoNotificaciones.SetText("");
         MenuOpciones.SetActive(false);
         UpdateScore();
+
+        //Cargamos la puntuación del jugador
+        CargarPuntuacionJugador();
+
+        //Empezamos
         StartCoroutine(SpawnWaves());
     }
 
+    #region Puntuacion máxima
+
+    /// <summary>
+    /// Determina si la puntuación actual es la mejor del jugador
+    /// </summary>
+    /// <param name="puntuacion"></param>
+    private void NuevaPuntuacion(int puntuacion)
+    {
+        if(puntuacion > puntuacionMaxima.PuntosMaximos)
+        {
+            GuardarPuntuacionJugador();
+            Notificar("Nueva puntuación máxima " + puntuacion, 5f);
+        }
+    }
+
+    /// <summary>
+    /// Recupera la puntuación máxima del jugador
+    /// </summary>
+    private void CargarPuntuacionJugador()
+    {
+        puntuacionMaxima = new PuntuacionMaxima();
+        if(PlayerPrefs.HasKey("puntuacionMaxima"))
+        {
+            puntuacionMaxima.PuntosMaximos = PlayerPrefs.GetInt("puntuacionMaxima");
+        }
+    }
+
+    /// <summary>
+    /// Guarda en preferencias la puntuación del jugador
+    /// </summary>
+    private void GuardarPuntuacionJugador()
+    {
+        PlayerPrefs.SetInt("puntuacionMaxima", puntuacionMaxima.PuntosMaximos);
+    }
+
+    #endregion Puntuacion máxima
+
     public void GameOver()
     {
+        //Game over
         textoEstado.SetText("Game Over!");
         gameOver = true;
+
+        //Evaluamos si ha hecho record
+        NuevaPuntuacion(score);
+
         //El menú lo mostramos al terminar la oleada
     }
 
@@ -86,15 +135,6 @@ public class ControladorDeJuego : MonoBehaviour, INotificador
     public NivelDificultad GetNivelDificultad()
     {
         return levelManager.GetNivelActual();
-    }
-
-    /// <summary>
-    /// Realiza una notificación al usuario
-    /// </summary>
-    /// <param name="texto"></param>
-    public void Notificar(string texto)
-    {
-        StartCoroutine(RealizarNotificacion(texto));
     }
 
     private void UpdateScore()
@@ -174,23 +214,53 @@ public class ControladorDeJuego : MonoBehaviour, INotificador
         return enemigosOleada;
     }
 
-    IEnumerator RealizarNotificacion(string texto)
+    #region INotificador
+
+    /// <summary>
+    /// Realiza una notificación al usuario (duración por defecto)
+    /// </summary>
+    /// <param name="texto">Texto de la notificación</param>
+    public void Notificar(string texto)
+    {
+        StartCoroutine(RealizarNotificacion(texto, CONFIGURACION.TIEMPO_NOTIFICACIONES));
+    }
+
+    /// <summary>
+    /// Realiza una notificación al usuario
+    /// </summary>
+    /// <param name="texto">Texto de la notificación</param>
+    /// <param name="duracion">Duración de la notificación</param>
+    public void Notificar(string texto, float duracion)
+    {
+        StartCoroutine(RealizarNotificacion(texto, duracion));
+    }
+
+    /// <summary>
+    /// Realiza una notificación temporizada
+    /// </summary>
+    /// <param name="texto"></param>
+    /// <param name="duracion"></param>
+    /// <returns></returns>
+    IEnumerator RealizarNotificacion(string texto, float duracion)
     {
         if(textoNotificaciones != null) //Establezco el texto de la notificación
         {
             textoNotificaciones.SetText(texto);
         }
 
-        yield return new WaitForSeconds(CONFIGURACION.TIEMPO_NOTIFICACIONES);
+        yield return new WaitForSeconds(duracion);
 
         if (textoNotificaciones != null) //Vacío la notificación
         {
             textoNotificaciones.SetText("");
         }
     }
+
+    #endregion INotificador
 }
 
 public interface INotificador
 {
     void Notificar(string texto);
+    void Notificar(string texto, float duracion);
 }

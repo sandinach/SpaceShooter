@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +12,8 @@ public class ControladorDeVida : MonoBehaviour
     bool impactoRecibido = false;
     private ControladorDeJuego controladorDeJuego;
 
-    public Slider barraDeSalud;
+    public Slider barra;
+    public TextMeshProUGUI textoValor;
     public Image ImagenImpacto;
     public float flashSpeed = 5f;
     public Color flashColor = new Color(1f, 0f, 0f, 0.5f);
@@ -29,7 +32,8 @@ public class ControladorDeVida : MonoBehaviour
         }
 
         saludJugador = saludJugadorInicial;
-        actualizarBarra();
+        actualizarCapaVisual();
+        StartCoroutine(regenerar());
     }
 	
 	// Update is called once per frame
@@ -55,9 +59,13 @@ public class ControladorDeVida : MonoBehaviour
     {
         impactoRecibido = true; //Activo el flag de impacto
         saludJugador -= daño;
-        actualizarBarra();
+        saludJugador = Math.Max(0, saludJugador); //Nunca menos de 0
+        actualizarCapaVisual();
         if (saludJugador <= 0) //Si se queda sin vida...
         {
+            //Para que no termine (ocasionalmente) de color rojo
+            ImagenImpacto.color = Color.clear;
+
             controladorDeJuego.GameOver();
             return true;
         }
@@ -66,10 +74,10 @@ public class ControladorDeVida : MonoBehaviour
 
     public void AumentarVida(int cantidad)
     {
-        if (saludJugador <= 100)
+        if (saludJugador < 100)
         {
             saludJugador = Math.Min(100, saludJugador + cantidad); //Maximo 100
-            actualizarBarra();
+            actualizarCapaVisual();
             controladorDeJuego.Notificar("Salud +" + cantidad);
         }
         else
@@ -91,11 +99,37 @@ public class ControladorDeVida : MonoBehaviour
     /// <summary>
     /// Actualiza la barra de energia
     /// </summary>
-    private void actualizarBarra()
+    private void actualizarCapaVisual()
     {
-        if (barraDeSalud != null)
+        if (barra != null)
         {
-            barraDeSalud.value = saludJugador;
+            barra.value = saludJugador;
+        }
+        if (textoValor != null)
+        {
+            textoValor.SetText(saludJugador + "%");
+        }
+    }
+
+    /// <summary>
+    /// Rutina de regeneración
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator regenerar()
+    {
+        while (true)
+        { // loops forever...
+            if (saludJugador < 100)
+            { // Si está por debajo de 100
+                saludJugador += 1; //La vida la incrementamos de 1 en 1 
+                saludJugador = Math.Min(100, saludJugador); //Máximo 100
+                actualizarCapaVisual();
+                yield return new WaitForSeconds(1);
+            }
+            else
+            { // Si ya esta a tope, no hago nada 
+                yield return null;
+            }
         }
     }
 }
