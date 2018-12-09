@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Movimiento : MonoBehaviour
+public class Movimiento : MonoBehaviour, IMovimiento
 {
 
     /// <summary>
@@ -18,15 +16,16 @@ public class Movimiento : MonoBehaviour
     /// <summary>
     /// Actualitza el valor
     /// </summary>
-    public void Actualizar()
+    public void Actualizar(float nuevaVelocidad)
     {
-        SetValue(velocidad);
+        velocidad = nuevaVelocidad;
+        SetValue(nuevaVelocidad);
     }
 
     /// <summary>
     /// Establece el valor
     /// </summary>
-    private void SetValue(float valor)
+    protected virtual void SetValue(float valor)
     {
         GetComponent<Rigidbody>().velocity = transform.forward * valor;
     }

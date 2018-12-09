@@ -98,7 +98,7 @@ public class ControladorDeJuego : MonoBehaviour, INotificador
     /// </summary>
     private void GuardarPuntuacionJugador()
     {
-        PlayerPrefs.SetInt("puntuacionMaxima", puntuacionMaxima.PuntosMaximos);
+        PlayerPrefs.SetInt("puntuacionMaxima", score);
     }
 
     #endregion Puntuacion máxima

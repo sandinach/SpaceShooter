@@ -1557,8 +1557,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tiposDeEnemigos:
+  - {fileID: 1178783684425604, guid: 67d546f3fdbd8054db5c3e5efd5807a5, type: 2}
   - {fileID: 1782947716782764, guid: ce3671cc62b814947a8dcca339d5af7a, type: 2}
   - {fileID: 1286417176967054, guid: e2940aba3995bea49812483dc10f1e1b, type: 2}
+  - {fileID: 1131739073064850, guid: be16c69c8d833734c906aaeae516d2aa, type: 2}
   zonaDespliegeEnemigos: {x: 10, y: 0, z: 32}
   tiposDePowerUps:
   - {fileID: 1403929194377086, guid: 8613f9cb0a88c24428410b9c1e169e0c, type: 2}

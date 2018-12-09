@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MovimientoEvasivo : MonoBehaviour {
@@ -13,15 +12,14 @@ public class MovimientoEvasivo : MonoBehaviour {
     public LimiteArea limite;
 
     private float destinoManiobra;
-    private float velocidadActual;
-    private Rigidbody rb;
+    protected float velocidadActual;
+    protected Rigidbody rb;
 
 
     // Use this for initialization
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        velocidadActual = rb.velocity.z;
+        Inicializar();
 
         StartCoroutine(Evadir());
     }
@@ -29,16 +27,32 @@ public class MovimientoEvasivo : MonoBehaviour {
     // Update is called once per frame
     void FixedUpdate()
     {
-        float newManuever = Mathf.MoveTowards(rb.velocity.x, destinoManiobra, Time.deltaTime + smoothing);
-        rb.velocity = new Vector3(newManuever, 0.0f, velocidadActual);
-        rb.position = new Vector3
+        Actualizar();
+    }
+
+    protected virtual void Inicializar()
+    {
+        rb = GetComponent<Rigidbody>();
+        velocidadActual = rb.velocity.z;
+    }
+
+    protected virtual void Actualizar()
+    {
+        ActualizarRigitBody(rb);
+    }
+
+    protected void ActualizarRigitBody(Rigidbody rigidbody)
+    {
+        float newManuever = Mathf.MoveTowards(rigidbody.velocity.x, destinoManiobra, Time.deltaTime + smoothing);
+        rigidbody.velocity = new Vector3(newManuever, 0.0f, velocidadActual);
+        rigidbody.position = new Vector3
             (
-                Mathf.Clamp(rb.position.x, limite.xMin, limite.xMax),
+                Mathf.Clamp(rigidbody.position.x, limite.xMin, limite.xMax),
                 0.0f,
-                Mathf.Clamp(rb.position.z, limite.zMin, limite.zMax)
+                Mathf.Clamp(rigidbody.position.z, limite.zMin, limite.zMax)
             );
         //inclinación
-        rb.rotation = Quaternion.Euler(0.0f, 0.0f, rb.velocity.x * -inclinacion);
+        rigidbody.rotation = Quaternion.Euler(0.0f, 0.0f, rigidbody.velocity.x * -inclinacion);
     }
 
     IEnumerator Evadir()

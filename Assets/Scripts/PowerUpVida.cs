@@ -27,11 +27,11 @@ public class PowerUpVida : MonoBehaviour {
     {
         if (other.tag == "Player")
         {
-            recogerPorwerUp();
+            RecogerPorwerUp();
         }
     }
 
-    private void recogerPorwerUp()
+    private void RecogerPorwerUp()
     {
         if (animacion != null) //Si tengo animación la disparo
             Instantiate(animacion, transform.position, transform.rotation);
@@ -39,7 +39,6 @@ public class PowerUpVida : MonoBehaviour {
         if (controladorDeVida != null)
         {
             controladorDeVida.AumentarVida(valor);
-            Debug.Log("Salud del jugador " + controladorDeVida.VidaActual());
         }
 
         Destroy(gameObject); //Destruyo el power Up

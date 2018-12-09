@@ -40,15 +40,23 @@ public class ControladorDeEnemigos : MonoBehaviour
     private void ajustarDificultad()
     {
         nivelDificultad = controladorDeJuego.GetNivelDificultad();
-        
-        //Establezco los nuevos valores y actualizo
-        movimiento.velocidad = nivelDificultad.Velocidad;
-        movimiento.Actualizar();
 
         //Establezco los nuevos valores y actualizo
-        sistemaArmamento.CadenciaDeDisparo = nivelDificultad.Cadencia;
-        sistemaArmamento.Actualizar();
+        if (movimiento != null)
+        {
+            movimiento.Actualizar(nivelDificultad.Velocidad);
+        }
 
-        movimientoEvasivo.enabled = nivelDificultad.UsarMovimientoEvasivo;
+        //Establezco los nuevos valores y actualizo
+        if (sistemaArmamento != null)
+        {
+            sistemaArmamento.CadenciaDeDisparo = nivelDificultad.Cadencia;
+            sistemaArmamento.Actualizar();
+        }
+
+        if (movimientoEvasivo != null)
+        {
+            movimientoEvasivo.enabled = nivelDificultad.UsarMovimientoEvasivo;
+        }
     }
 }

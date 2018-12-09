@@ -74,8 +74,11 @@
     <Compile Include="Assets\Scripts\DestruirPorContacto.cs" />
     <Compile Include="Assets\Scripts\DestruirPorFueraDeArea.cs" />
     <Compile Include="Assets\Scripts\DestruirPorTiempo.cs" />
+    <Compile Include="Assets\Scripts\IMovimiento.cs" />
     <Compile Include="Assets\Scripts\Movimiento.cs" />
     <Compile Include="Assets\Scripts\MovimientoEvasivo.cs" />
+    <Compile Include="Assets\Scripts\MovimientoEvasivoSincronizado.cs" />
+    <Compile Include="Assets\Scripts\MovimientoSincronizado.cs" />
     <Compile Include="Assets\Scripts\PowerUpEnergia.cs" />
     <Compile Include="Assets\Scripts\PowerUpVida.cs" />
     <Compile Include="Assets\Scripts\PuntuacionMaxima.cs" />
