@@ -77,7 +77,7 @@ public class ControladorDeJuego : MonoBehaviour, INotificador
         if(puntuacion > puntuacionMaxima.PuntosMaximos)
         {
             GuardarPuntuacionJugador();
-            Notificar("Nueva puntuación máxima " + puntuacion, 5f);
+            Notificar("Nuevo record!", 5f);
         }
     }
 

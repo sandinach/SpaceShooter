@@ -33,18 +33,36 @@ public class ControladorDeDificultad
     /// </summary>
     private void LoadLevels()
     {
-        DefaultLevels();
+        if (!LoadLevelsFromFile()) //Trato de cargar los niveles desde fichero
+        {
+            DefaultLevels(); //Sino utilizo los valores HardCoded
+        }
     }
 
-    //private void LoadLevelsFromFile()
-    //{
-    //    string rutaFichero = Path.Combine(Application.streamingAssetsPath, nombreFicheroDeNiveles);
-    //    if(File.Exists(rutaFichero))
-    //    {
-    //        string nivelesAsJson = File.ReadAllText(rutaFichero);
-    //        NivelesDeDificultad nivel = JsonUtility.FromJson<NivelesDeDificultad>(nivelesAsJson);
-    //    }
-    //}
+    private bool LoadLevelsFromFile()
+    {
+        string rutaFichero = Path.Combine(Application.streamingAssetsPath, nombreFicheroDeNiveles);
+        if (File.Exists(rutaFichero))
+        {
+            string nivelesAsJson = File.ReadAllText(rutaFichero);
+            NivelesDeDificultad niveles = JsonUtility.FromJson<NivelesDeDificultad>(nivelesAsJson);
+            if (niveles != null && niveles.Niveles.Count > 0) //Verifico que tenga niveles
+            {
+                enumeradorNiveles = niveles.Niveles.GetEnumerator();
+                if (enumeradorNiveles.MoveNext())
+                {
+                    EstablecerNuevoNivel();
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private void SaveLevelsToJson(NivelesDeDificultad niveles)
+    {
+
+    }
 
     /// <summary>
     /// Carga la configuración de niveles
@@ -52,16 +70,16 @@ public class ControladorDeDificultad
     private void DefaultLevels()
     {
         List <NivelDificultad> listaNiveles = new List<NivelDificultad>();
-        listaNiveles.Add(new NivelDificultad("Nivel 1", 1, 1.5f, -6f, true, 200));
-        listaNiveles.Add(new NivelDificultad("Nivel 2", 2, 1.4f, -7f, true, 300));
-        listaNiveles.Add(new NivelDificultad("Nivel 3", 3, 1.3f, -8f, true, 400));
-        listaNiveles.Add(new NivelDificultad("Nivel 4", 4, 1.2f, -9f, true, 500));
-        listaNiveles.Add(new NivelDificultad("Nivel 5", 5, 1.1f, -10f, true, 600));
-        listaNiveles.Add(new NivelDificultad("Nivel 6", 6, 1.0f, -10f, true, 200));
-        listaNiveles.Add(new NivelDificultad("Nivel 7", 7, 0.9f, -11f, true, 200));
-        listaNiveles.Add(new NivelDificultad("Nivel 8", 8, 0.8f, -12f, true, 200));
-        listaNiveles.Add(new NivelDificultad("Nivel 9", 9, 0.7f, -13f, true, 200));
-        listaNiveles.Add(new NivelDificultad("Nivel 10", 10, 0.6f, -14f, true, 200));
+        listaNiveles.Add(new NivelDificultad("Nivel 1", 1, 1.5f, -6f, true, 500));
+        listaNiveles.Add(new NivelDificultad("Nivel 2", 2, 1.4f, -7f, true, 800));
+        listaNiveles.Add(new NivelDificultad("Nivel 3", 3, 1.3f, -8f, true, 1200));
+        listaNiveles.Add(new NivelDificultad("Nivel 4", 4, 1.2f, -9f, true, 1600));
+        listaNiveles.Add(new NivelDificultad("Nivel 5", 5, 1.1f, -10f, true, 2000));
+        listaNiveles.Add(new NivelDificultad("Nivel 6", 6, 1.0f, -10f, true, 2500));
+        listaNiveles.Add(new NivelDificultad("Nivel 7", 7, 0.9f, -11f, true, 3000));
+        listaNiveles.Add(new NivelDificultad("Nivel 8", 8, 0.8f, -12f, true, 3500));
+        listaNiveles.Add(new NivelDificultad("Nivel 9", 9, 0.7f, -13f, true, 4000));
+        listaNiveles.Add(new NivelDificultad("Nivel Máximo", 10, 0.6f, -14f, true, 5000));
 
         enumeradorNiveles = listaNiveles.GetEnumerator();
         if(enumeradorNiveles.MoveNext())
@@ -117,7 +135,7 @@ public class ControladorDeDificultad
 [System.Serializable]
 public class NivelesDeDificultad
 {
-    public NivelDificultad[] Niveles;
+    public List<NivelDificultad> Niveles = new List<NivelDificultad>();
 
     /// <summary>
     /// Constructor por defecto
@@ -128,6 +146,7 @@ public class NivelesDeDificultad
 /// <summary>
 /// Clase para almacenar los modificadores de dificultad
 /// </summary>
+[System.Serializable]
 public class NivelDificultad
 {
     public string NombreNivel = "Nivel 1";
