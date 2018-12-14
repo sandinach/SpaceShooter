@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 
 public class ControladorDeJuego : MonoBehaviour, INotificador
@@ -181,10 +178,10 @@ public class ControladorDeJuego : MonoBehaviour, INotificador
         while (true)
         {
             yield return new WaitForSeconds(pausaInicial);
-            for (int i = 0; i < calcularNumeroEnemigos(); i++)
+            for (int i = 0; i < CalcularNumeroEnemigos(); i++)
             {
                 GameObject enemigo = tiposDeEnemigos[UnityEngine.Random.Range(0, tiposDeEnemigos.Length)];
-                Vector3 posicionDespliege = new Vector3(UnityEngine.Random.Range(-zonaDespliegeEnemigos.x, zonaDespliegeEnemigos.x), zonaDespliegeEnemigos.y, zonaDespliegeEnemigos.z);
+                Vector3 posicionDespliege = new Vector3(CalcularCoordenadaX(enemigo), zonaDespliegeEnemigos.y, zonaDespliegeEnemigos.z);
                 Quaternion rotacionDespliege = Quaternion.identity;
                 Instantiate(enemigo, posicionDespliege, rotacionDespliege);
                 yield return new WaitForSeconds(pausaEntreEnemigos);
@@ -207,10 +204,24 @@ public class ControladorDeJuego : MonoBehaviour, INotificador
         }
     }
 
-    private int calcularNumeroEnemigos()
+    private float CalcularCoordenadaX(GameObject enemigo)
+    {
+        //Las formaciones son mayores por lo que hay que reducir la zona de despliege
+        Formacion formacion = enemigo.GetComponent<Formacion>();
+        if (formacion != null) //Es una formacion
+        {
+            return UnityEngine.Random.Range(-zonaDespliegeEnemigos.x + formacion.CorreccionEjeX, zonaDespliegeEnemigos.x - formacion.CorreccionEjeX);
+        }
+        else
+        {
+            return UnityEngine.Random.Range(-zonaDespliegeEnemigos.x, zonaDespliegeEnemigos.x);
+        }
+    }
+
+    private int CalcularNumeroEnemigos()
     {
         int enemigosOleada = numeroEnemigos + levelManager.GetNivelActual().Enemigos;
-        Debug.Log("Enemigos por oleada: " + enemigosOleada);
+        //Debug.Log("Enemigos por oleada: " + enemigosOleada);
         return enemigosOleada;
     }
 

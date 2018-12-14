@@ -33,6 +33,18 @@ public class ControladorDeDificultad
     /// </summary>
     private void LoadLevels()
     {
+        ////Ojo => test
+        //List<NivelDificultad> listaNiveles = new List<NivelDificultad>();
+        //listaNiveles.Add(new NivelDificultad("Nivel Máximo", 10, 0.6f, -14f, true, 5000));
+
+        //enumeradorNiveles = listaNiveles.GetEnumerator();
+        //if (enumeradorNiveles.MoveNext())
+        //{
+        //    EstablecerNuevoNivel();
+        //}
+        //return;
+
+
         if (!LoadLevelsFromFile()) //Trato de cargar los niveles desde fichero
         {
             DefaultLevels(); //Sino utilizo los valores HardCoded
@@ -123,7 +135,7 @@ public class ControladorDeDificultad
         currentLevel = enumeradorNiveles.Current;
         siguienteNivel = currentLevel.SiguienteNivel;
         notificador.Notificar(currentLevel.NombreNivel);
-        Debug.Log("Nivel establecido: " + currentLevel.NombreNivel);
+        //Debug.Log("Nivel establecido: " + currentLevel.NombreNivel);
     }
 
     public string GetNombreNivel()

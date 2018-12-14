@@ -6,6 +6,8 @@ public class MovimientoSincronizado : Movimiento
 {
     public GameObject[] naves;
 
+    public MovimientoSincronizado() : base() {}
+
     /// <summary>
     /// Establece el valor
     /// </summary>
@@ -15,7 +17,7 @@ public class MovimientoSincronizado : Movimiento
         {
             if (nave != null)
             {
-                nave.GetComponent<Rigidbody>().velocity = transform.forward * valor;
+                nave.GetComponent<Rigidbody>().velocity = nave.transform.forward * valor;
             }
         }
         GestionarDestruidos();

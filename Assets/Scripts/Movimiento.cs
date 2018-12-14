@@ -10,7 +10,7 @@ public class Movimiento : MonoBehaviour, IMovimiento
 
     public void Start()
     {
-        SetValue(velocidad); //Establece el valor inicial
+       SetValue(velocidad); //Establece el valor inicial
     }
 
     /// <summary>

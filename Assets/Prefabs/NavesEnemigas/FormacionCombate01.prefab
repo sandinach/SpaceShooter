@@ -88,6 +88,9 @@ GameObject:
   - component: {fileID: 114493249639533058}
   - component: {fileID: 114715924208239976}
   - component: {fileID: 114651483147657830}
+  - component: {fileID: 114357047893698548}
+  - component: {fileID: 54930825534614894}
+  - component: {fileID: 135181063504777388}
   m_Layer: 0
   m_Name: FormacionCombate01
   m_TagString: Enemigo
@@ -947,6 +950,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!54 &54930825534614894
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1178783684425604}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &114186150319387974
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -978,6 +996,22 @@ MonoBehaviour:
   "da\xF1o": 25
   explosionPropia: {fileID: 100012, guid: 384371afbb4354cc9a3fc68eab303756, type: 2}
   explosionAjena: {fileID: 0}
+--- !u!114 &114357047893698548
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1178783684425604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76771a6eecffc8c4493730df28067118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  naves:
+  - {fileID: 1306649570038996}
+  - {fileID: 1250959041319956}
+  - {fileID: 1269842641765184}
+  CorreccionEjeX: 2.5
 --- !u!114 &114493249639533058
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1049,7 +1083,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 796ca377706918c40982531c7f807b0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destino: 8
+  destino: 6.5
   smoothing: 7.5
   inclinacion: 10
   esperaInicial: {x: 0.5, y: 1}
@@ -1147,6 +1181,18 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 1.3
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &135181063504777388
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1178783684425604}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &135486907649935474
 SphereCollider:

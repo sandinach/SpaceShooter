@@ -38,11 +38,13 @@ public class MovimientoEvasivo : MonoBehaviour {
 
     protected virtual void Actualizar()
     {
+        
         ActualizarRigitBody(rb);
     }
 
     protected void ActualizarRigitBody(Rigidbody rigidbody)
     {
+        velocidadActual = rigidbody.velocity.z;
         float newManuever = Mathf.MoveTowards(rigidbody.velocity.x, destinoManiobra, Time.deltaTime + smoothing);
         rigidbody.velocity = new Vector3(newManuever, 0.0f, velocidadActual);
         rigidbody.position = new Vector3

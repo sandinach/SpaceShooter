@@ -34,7 +34,7 @@ public class DestruirPorContacto : MonoBehaviour
         }
         if (controladorDeVida == null)
         {
-            Debug.Log("No se ha encontrado 'controladorDeVida' script");
+            Debug.Log(this.gameObject.name +" No se ha encontrado 'controladorDeVida' script");
         }
     }
 

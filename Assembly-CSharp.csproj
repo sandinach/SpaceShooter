@@ -74,6 +74,7 @@
     <Compile Include="Assets\Scripts\DestruirPorContacto.cs" />
     <Compile Include="Assets\Scripts\DestruirPorFueraDeArea.cs" />
     <Compile Include="Assets\Scripts\DestruirPorTiempo.cs" />
+    <Compile Include="Assets\Scripts\Formacion.cs" />
     <Compile Include="Assets\Scripts\IMovimiento.cs" />
     <Compile Include="Assets\Scripts\Movimiento.cs" />
     <Compile Include="Assets\Scripts\MovimientoEvasivo.cs" />
