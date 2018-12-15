@@ -32,10 +32,6 @@ public class DestruirPorContacto : MonoBehaviour
         {
             controladorDeVida = controlObject.GetComponent<ControladorDeVida>();
         }
-        if (controladorDeVida == null)
-        {
-            Debug.Log(this.gameObject.name +" No se ha encontrado 'controladorDeVida' script");
-        }
     }
 
     private void OnTriggerEnter(Collider other)
