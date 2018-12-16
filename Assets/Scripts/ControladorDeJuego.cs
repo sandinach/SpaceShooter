@@ -40,6 +40,8 @@ public class ControladorDeJuego : MonoBehaviour, INotificador
 
     private PuntuacionMaxima puntuacionMaxima;
 
+    private readonly string TEXTO_GAMEOVER = "Game Over!";
+
     void Start()
     {
         levelManager = new ControladorDeDificultad(this);
@@ -103,7 +105,7 @@ public class ControladorDeJuego : MonoBehaviour, INotificador
     public void GameOver()
     {
         //Game over
-        textoEstado.SetText("Game Over!");
+        textoEstado.SetText(TEXTO_GAMEOVER);
         gameOver = true;
 
         //Evaluamos si ha hecho record
@@ -169,7 +171,10 @@ public class ControladorDeJuego : MonoBehaviour, INotificador
         else
         {
             Time.timeScale = 1;
-            if(!gameOver) textoEstado.SetText("");
+            if (!gameOver)
+                textoEstado.SetText("");
+            else
+                textoEstado.SetText(TEXTO_GAMEOVER);
         }
     }
 
