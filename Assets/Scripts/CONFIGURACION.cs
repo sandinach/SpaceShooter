@@ -9,8 +9,8 @@ public static class CONFIGURACION
     private static SliderConfig ENEMIGOS_POR_OLEADA = new SliderConfig(5, 8, 20); //Establezco un rango de 5 a 20 con valor actual de 8
 
     //Gestion de energia
-    private static SliderConfig GENERACION_ENERGIA = new SliderConfig(0, 1, 3);
-    private static SliderConfig ENERGIA_INICIAL = new SliderConfig(0, 20, 100);
+    private static SliderConfig GENERACION_ENERGIA = new SliderConfig(1, 2, 3);
+    private static SliderConfig ENERGIA_INICIAL = new SliderConfig(0, 50, 100);
 
     /// <summary>
     /// Devuelve el valor de configuración o la preferencia de usuario para los enemigos por oleada

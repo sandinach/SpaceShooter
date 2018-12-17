@@ -15,6 +15,7 @@ public class Formacion : MonoBehaviour
     /// Corrección de la posición de instanciamiento
     /// </summary>
     public float CorreccionEjeX = 2.5f;
+    public float CorreccionInstanciamiento = 0.4f;
 
     private void Update()
     {

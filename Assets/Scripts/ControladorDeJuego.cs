@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -189,7 +190,7 @@ public class ControladorDeJuego : MonoBehaviour, INotificador
                 Vector3 posicionDespliege = new Vector3(CalcularCoordenadaX(enemigo), zonaDespliegeEnemigos.y, zonaDespliegeEnemigos.z);
                 Quaternion rotacionDespliege = Quaternion.identity;
                 Instantiate(enemigo, posicionDespliege, rotacionDespliege);
-                yield return new WaitForSeconds(pausaEntreEnemigos);
+                yield return new WaitForSeconds(CalcularPausaEntreEnemigos(enemigo));
             }
 
             //Instanciamos un powerUp aleatoriamente
@@ -209,6 +210,30 @@ public class ControladorDeJuego : MonoBehaviour, INotificador
         }
     }
 
+    /// <summary>
+    /// Método para dilatar la espera entre enemigos si se trata de una formación
+    /// </summary>
+    /// <param name="enemigo"></param>
+    /// <returns></returns>
+    private float CalcularPausaEntreEnemigos(GameObject enemigo)
+    {
+        Formacion formacion = enemigo.GetComponent<Formacion>();
+        if (formacion != null) //Es una formacion
+        {
+            float espera = pausaEntreEnemigos + formacion.CorreccionInstanciamiento; //Las formaciones son mas grandes, hay que dejar que pase un poco mas de tiempo
+            return espera;
+        }
+        else
+        {
+            return pausaEntreEnemigos;
+        }
+    }
+
+    /// <summary>
+    /// Método para calcular la zona de despliegue
+    /// </summary>
+    /// <param name="enemigo"></param>
+    /// <returns></returns>
     private float CalcularCoordenadaX(GameObject enemigo)
     {
         //Las formaciones son mayores por lo que hay que reducir la zona de despliege

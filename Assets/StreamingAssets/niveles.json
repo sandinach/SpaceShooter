@@ -1,13 +1,13 @@
 {"Niveles": [
-	{ "NombreNivel" : "Nivel 1", "Enemigos" : 0, "Cadencia" : 1.5, "Velocidad" : -6, "UsarMovimientoEvasivo" : false, "SiguienteNivel" : 300 },
+	{ "NombreNivel" : "Nivel 1+", "Enemigos" : 0, "Cadencia" : 1.5, "Velocidad" : -6, "UsarMovimientoEvasivo" : false, "SiguienteNivel" : 300 },
 	{ "NombreNivel" : "Nivel 2", "Enemigos" : 4, "Cadencia" : 1.5, "Velocidad" : -6, "UsarMovimientoEvasivo" : true, "SiguienteNivel" : 400 },
 	{ "NombreNivel" : "Nivel 3", "Enemigos" : 4, "Cadencia" : 1.4, "Velocidad" : -6, "UsarMovimientoEvasivo" : true, "SiguienteNivel" : 500 },
 	{ "NombreNivel" : "Nivel 4", "Enemigos" : 6, "Cadencia" : 1.4, "Velocidad" : -6, "UsarMovimientoEvasivo" : true, "SiguienteNivel" : 600 },
 	{ "NombreNivel" : "Nivel 5", "Enemigos" : 6, "Cadencia" : 1.3, "Velocidad" : -7, "UsarMovimientoEvasivo" : true, "SiguienteNivel" : 700 },
 	{ "NombreNivel" : "Nivel 6", "Enemigos" : 10, "Cadencia" : 1.3, "Velocidad" : -8, "UsarMovimientoEvasivo" : true, "SiguienteNivel" : 800 },
 	{ "NombreNivel" : "Nivel 7", "Enemigos" : 10, "Cadencia" : 1.3, "Velocidad" : -9, "UsarMovimientoEvasivo" : true, "SiguienteNivel" : 900 },
-	{ "NombreNivel" : "Nivel 8", "Enemigos" : 15, "Cadencia" : 1.0, "Velocidad" : -10, "UsarMovimientoEvasivo" : true, "SiguienteNivel" : 1000 },
-	{ "NombreNivel" : "Nivel 9", "Enemigos" : 15, "Cadencia" : 1.0, "Velocidad" : -11, "UsarMovimientoEvasivo" : true, "SiguienteNivel" : 1100 },
-	{ "NombreNivel" : "Nivel Max", "Enemigos" : 20, "Cadencia" : 1.0, "Velocidad" : -12, "UsarMovimientoEvasivo" : true, "SiguienteNivel" : 1200 }
+	{ "NombreNivel" : "Nivel 8", "Enemigos" : 14, "Cadencia" : 1.0, "Velocidad" : -10, "UsarMovimientoEvasivo" : true, "SiguienteNivel" : 1000 },
+	{ "NombreNivel" : "Nivel 9", "Enemigos" : 14, "Cadencia" : 1.0, "Velocidad" : -11, "UsarMovimientoEvasivo" : true, "SiguienteNivel" : 1100 },
+	{ "NombreNivel" : "Nivel Max", "Enemigos" : 18, "Cadencia" : 1.0, "Velocidad" : -12, "UsarMovimientoEvasivo" : true, "SiguienteNivel" : 1200 }
 	]
 }

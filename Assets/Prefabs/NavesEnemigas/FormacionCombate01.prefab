@@ -1012,6 +1012,7 @@ MonoBehaviour:
   - {fileID: 1250959041319956}
   - {fileID: 1269842641765184}
   CorreccionEjeX: 2.5
+  CorreccionInstanciamiento: 0.4
 --- !u!114 &114493249639533058
 MonoBehaviour:
   m_ObjectHideFlags: 1

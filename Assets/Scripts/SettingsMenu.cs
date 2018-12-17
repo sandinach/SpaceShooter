@@ -11,7 +11,6 @@ public class SettingsMenu : MonoBehaviour
     public Slider sliderEfectos;
     public Slider sliderMusica;
     public Slider sliderNumeroEnemigos;
-    public Slider sliderVelocidad;
     public Slider sliderGeneracionEnergia;
     public Slider sliderEnergiaInicial;
 
@@ -23,7 +22,6 @@ public class SettingsMenu : MonoBehaviour
         sliderMusica.value = volumenMusica;
 
         configurarSlider(sliderNumeroEnemigos, CONFIGURACION.GetConfigEnemigosPorOleada());
-        configurarSlider(sliderVelocidad, CONFIGURACION.GetConfigVelocidadEnemigos());
         configurarSlider(sliderGeneracionEnergia, CONFIGURACION.GetConfigGeneracionEnergia());
         configurarSlider(sliderEnergiaInicial, CONFIGURACION.GetConfigEnergiaInicial());
     }
@@ -50,11 +48,6 @@ public class SettingsMenu : MonoBehaviour
     public void SetNumeroEnemigos(float valor)
     {
         CONFIGURACION.SetEnemigosPorOleada(valor);
-    }
-
-    public void SetVelocidadEnemigos(float valor)
-    {
-        CONFIGURACION.SetVelocidadEnemigos(valor);
     }
 
     public void SetEnergiaInicial(float valor)

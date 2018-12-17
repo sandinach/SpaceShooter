@@ -1,9 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
+/// <summary>
+/// Clase para el control de niveles de dificultad
+/// Gestiona la carga de niveles JSON o defecto y el cambio de nivel por puntuación
+/// </summary>
 public class ControladorDeDificultad
 {
     private NivelDificultad currentLevel;
@@ -33,18 +35,6 @@ public class ControladorDeDificultad
     /// </summary>
     private void LoadLevels()
     {
-        ////Ojo => test
-        //List<NivelDificultad> listaNiveles = new List<NivelDificultad>();
-        //listaNiveles.Add(new NivelDificultad("Nivel Máximo", 10, 0.6f, -14f, true, 5000));
-
-        //enumeradorNiveles = listaNiveles.GetEnumerator();
-        //if (enumeradorNiveles.MoveNext())
-        //{
-        //    EstablecerNuevoNivel();
-        //}
-        //return;
-
-
         if (!LoadLevelsFromFile()) //Trato de cargar los niveles desde fichero
         {
             DefaultLevels(); //Sino utilizo los valores HardCoded
@@ -71,27 +61,24 @@ public class ControladorDeDificultad
         return false;
     }
 
-    private void SaveLevelsToJson(NivelesDeDificultad niveles)
-    {
-
-    }
-
     /// <summary>
     /// Carga la configuración de niveles
     /// </summary>
     private void DefaultLevels()
     {
-        List <NivelDificultad> listaNiveles = new List<NivelDificultad>();
-        listaNiveles.Add(new NivelDificultad("Nivel 1", 1, 1.5f, -6f, true, 500));
-        listaNiveles.Add(new NivelDificultad("Nivel 2", 2, 1.4f, -7f, true, 800));
-        listaNiveles.Add(new NivelDificultad("Nivel 3", 3, 1.3f, -8f, true, 1200));
-        listaNiveles.Add(new NivelDificultad("Nivel 4", 4, 1.2f, -9f, true, 1600));
-        listaNiveles.Add(new NivelDificultad("Nivel 5", 5, 1.1f, -10f, true, 2000));
-        listaNiveles.Add(new NivelDificultad("Nivel 6", 6, 1.0f, -10f, true, 2500));
-        listaNiveles.Add(new NivelDificultad("Nivel 7", 7, 0.9f, -11f, true, 3000));
-        listaNiveles.Add(new NivelDificultad("Nivel 8", 8, 0.8f, -12f, true, 3500));
-        listaNiveles.Add(new NivelDificultad("Nivel 9", 9, 0.7f, -13f, true, 4000));
-        listaNiveles.Add(new NivelDificultad("Nivel Máximo", 10, 0.6f, -14f, true, 5000));
+        List<NivelDificultad> listaNiveles = new List<NivelDificultad>
+        {
+            new NivelDificultad("Nivel 1", 0, 1.5f, -6f, true, 300),
+            new NivelDificultad("Nivel 2", 4, 1.5f, -6f, true, 400),
+            new NivelDificultad("Nivel 3", 4, 1.4f, -6f, true, 500),
+            new NivelDificultad("Nivel 4", 6, 1.4f, -6f, true, 600),
+            new NivelDificultad("Nivel 5", 6, 1.3f, -7f, true, 700),
+            new NivelDificultad("Nivel 6", 10, 1.3f, -8f, true, 800),
+            new NivelDificultad("Nivel 7", 10, 1.3f, -9f, true, 900),
+            new NivelDificultad("Nivel 8", 14, 1.0f, -10f, true, 1000),
+            new NivelDificultad("Nivel 9", 14, 1.0f, -11f, true, 1100),
+            new NivelDificultad("Nivel Máximo", 18, 1.0f, -12f, true, 1200)
+        };
 
         enumeradorNiveles = listaNiveles.GetEnumerator();
         if(enumeradorNiveles.MoveNext())
