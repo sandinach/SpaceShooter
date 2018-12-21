@@ -59,4 +59,9 @@ public class SettingsMenu : MonoBehaviour
     {
         CONFIGURACION.SetGeneracionEnergia(valor);
     }
+
+    public void BorrarPreferencias()
+    {
+        PlayerPrefs.DeleteAll();
+    }
 }

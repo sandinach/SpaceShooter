@@ -29,4 +29,9 @@ public class ControladorDeMenu : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void BorrarPreferencias()
+    {
+        PlayerPrefs.DeleteAll();
+    }
 }
