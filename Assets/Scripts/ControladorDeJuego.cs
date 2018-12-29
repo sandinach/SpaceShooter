@@ -26,6 +26,7 @@ public class ControladorDeJuego : MonoBehaviour, INotificador
     public float pausaEntreOleadas;
 
     public TextMeshProUGUI textoPuntuacion;
+    public TextMeshProUGUI textoPuntuacionMaxima;
     public TextMeshProUGUI textoEstado;
     public TextMeshProUGUI textoNivel;
     public TextMeshProUGUI textoNotificaciones;
@@ -91,6 +92,7 @@ public class ControladorDeJuego : MonoBehaviour, INotificador
         {
             puntuacionMaxima.PuntosMaximos = PlayerPrefs.GetInt("puntuacionMaxima");
         }
+        UpdateMaxScore(); //Actualizamos el texto
     }
 
     /// <summary>
@@ -99,6 +101,11 @@ public class ControladorDeJuego : MonoBehaviour, INotificador
     private void GuardarPuntuacionJugador()
     {
         PlayerPrefs.SetInt("puntuacionMaxima", score);
+    }
+
+    private void UpdateMaxScore()
+    {
+        textoPuntuacionMaxima.SetText("Récord: " + puntuacionMaxima.PuntosMaximos);
     }
 
     #endregion Puntuacion máxima

@@ -1,5 +1,5 @@
 {"Niveles": [
-	{ "NombreNivel" : "Nivel 1+", "Enemigos" : 0, "Cadencia" : 1.5, "Velocidad" : -6, "UsarMovimientoEvasivo" : false, "SiguienteNivel" : 300 },
+	{ "NombreNivel" : "Nivel 1", "Enemigos" : 0, "Cadencia" : 1.5, "Velocidad" : -6, "UsarMovimientoEvasivo" : false, "SiguienteNivel" : 300 },
 	{ "NombreNivel" : "Nivel 2", "Enemigos" : 4, "Cadencia" : 1.5, "Velocidad" : -6, "UsarMovimientoEvasivo" : true, "SiguienteNivel" : 400 },
 	{ "NombreNivel" : "Nivel 3", "Enemigos" : 4, "Cadencia" : 1.4, "Velocidad" : -6, "UsarMovimientoEvasivo" : true, "SiguienteNivel" : 500 },
 	{ "NombreNivel" : "Nivel 4", "Enemigos" : 6, "Cadencia" : 1.4, "Velocidad" : -6, "UsarMovimientoEvasivo" : true, "SiguienteNivel" : 600 },
