@@ -1084,7 +1084,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 796ca377706918c40982531c7f807b0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destino: 6.5
+  destino: 4
   smoothing: 7.5
   inclinacion: 10
   esperaInicial: {x: 0.5, y: 1}
