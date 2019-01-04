@@ -1,6 +1,6 @@
 WindowsStandalone
 PlayerPath?
-C:/Users/andpo/OneDrive/Documents/build_pac3_PC/Ases del espacio.exe
+C:/Users/andpo/OneDrive/Documents/TFG - Space Shooter/_Ejecutable/Ases del espacio.exe
 SceneListBegin?
 Assets/Scenes/Main.unity
 Assets/Scenes/Juego.unity
