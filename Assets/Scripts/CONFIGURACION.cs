@@ -99,6 +99,7 @@ public static class CONFIGURACION
         {
             PlayerPrefs.SetFloat("EnergiaInicial", valor);
             ENERGIA_INICIAL.SetCurrent(valor);
+            Debug.Log("CONFIGURACION.SetEnergiaInicial => Se establece valor a: " + valor);
         }
     }
 }
@@ -110,6 +111,7 @@ public class SliderConfigInt
 {
     int valorMinimo;
     int valorMaximo;
+    int valorInicial;
     int valorActual;
 
     private SliderConfigInt() { } //Nada de contructor vacío
@@ -117,7 +119,7 @@ public class SliderConfigInt
     public SliderConfigInt(int min, int current, int max)
     {
         valorMinimo = min;
-        valorActual = current;
+        valorInicial = valorActual = current;
         valorMaximo = max;
     }
 
@@ -161,6 +163,15 @@ public class SliderConfigInt
         else
             Debug.Log("SliderConfigInt.SetCurrent => Valor ignorado: " + newVal);
     }
+
+    /// <summary>
+    /// Restablece el valor actual a los valores iniciales
+    /// </summary>
+    public void Reset()
+    {
+        valorActual = valorInicial;
+        //Debug.Log("SliderConfigInt.Reset => Se establece valor a: " + valorActual);
+    }
 }
 
 /// <summary>
@@ -170,6 +181,7 @@ public class SliderConfig
 {
     float valorMinimo;
     float valorMaximo;
+    float valorInicial;
     float valorActual;
 
     private SliderConfig() { } //Nada de contructor vacío
@@ -177,7 +189,7 @@ public class SliderConfig
     public SliderConfig(float min, float current, float max)
     {
         valorMinimo = min;
-        valorActual = current;
+        valorInicial = valorActual = current;
         valorMaximo = max;
     }
 
@@ -220,6 +232,15 @@ public class SliderConfig
             valorActual = newVal;
         else
             Debug.Log("SliderConfig.SetCurrent => Valor ignorado: " + newVal);
+    }
+
+    /// <summary>
+    /// Restablece el valor actual a los valores iniciales
+    /// </summary>
+    public void Reset()
+    {
+        valorActual = valorInicial;
+        //Debug.Log("SliderConfig.Reset => Se establece valor a: " + valorActual);
     }
 }
 
